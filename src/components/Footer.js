@@ -47,14 +47,3 @@ class Footer extends Component {
 }
 
 export default Footer;
-
-// case "PREVIOUS":
-// return {
-//   ...state,
-//   next: "prethodni"
-// };
-// case "NEXT":
-// return {
-//   ...state,
-//   next: "sledeci"
-// };
