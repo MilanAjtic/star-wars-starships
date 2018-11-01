@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Consumer } from "../Context.js";
+import Starship from "./Starship.js";
 
 class Main extends Component {
   render() {
@@ -9,7 +10,7 @@ class Main extends Component {
           // console.log("value", value);
           const { starships } = value;
           const starshipsJsx = starships.map(starship => (
-            <div key={starship.created}>{starship.name}</div>
+            <Starship key={starship.created} starship={starship} />
           ));
           return (
             <div
