@@ -1,11 +1,7 @@
 import React from "react";
 
 const Header = () => {
-  return (
-    <div className="Header" style={{ backgroundColor: "yellow" }}>
-      Star Wars App - Starships
-    </div>
-  );
+  return <p style={{ fontSize: 32 }}> Star Wars App - Starships</p>;
 };
 
 export default Header;

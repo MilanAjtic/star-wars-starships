@@ -12,6 +12,14 @@ const reducer = (state, action) => {
         previous: action.previous,
         next: action.next
       };
+    case "SEARCH":
+      return {
+        ...state,
+        search: action.results,
+        previousSearch: action.previous,
+        nextSearch: action.next,
+        countSearch: action.count
+      };
     // case "PREVIOUS":
     //   return {
     //     ...state,
@@ -30,6 +38,7 @@ const reducer = (state, action) => {
 export class Provider extends Component {
   state = {
     starships: [],
+    search: [],
     dispatch: action => this.setState(state => reducer(state, action))
   };
   componentDidMount() {
@@ -52,6 +61,12 @@ export class Provider extends Component {
 
 export const Consumer = Context.Consumer;
 
-// uradi search (mozda na posebnoj ruti, ako ce search ici na api, a ne traziti kroz state)
-// ubaci rutu za stranu pojedinacnog starshipa
+// TODO
+
 // mozda uraditi listanje za pilote i filmove za svaki starship?
+// oznaciti redni broj strane na vrhu main-a
+
+// DONE
+
+// ubaci rutu za stranu pojedinacnog starshipa
+// uradi search (mozda na posebnoj ruti, ako ce search ici na api, a ne traziti kroz state)
