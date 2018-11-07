@@ -10,26 +10,9 @@ const reducer = (state, action) => {
         ...state,
         starships: action.results,
         previous: action.previous,
-        next: action.next
+        next: action.next,
+        count: action.count
       };
-    case "SEARCH":
-      return {
-        ...state,
-        search: action.results,
-        previousSearch: action.previous,
-        nextSearch: action.next,
-        countSearch: action.count
-      };
-    // case "PREVIOUS":
-    //   return {
-    //     ...state,
-    //     previous: "prethodni"
-    //   };
-    // case "NEXT":
-    //   return {
-    //     ...state,
-    //     next: "sledeci"
-    //   };
     default:
       return state;
   }
@@ -38,7 +21,6 @@ const reducer = (state, action) => {
 export class Provider extends Component {
   state = {
     starships: [],
-    search: [],
     dispatch: action => this.setState(state => reducer(state, action))
   };
   componentDidMount() {
@@ -46,7 +28,8 @@ export class Provider extends Component {
       this.setState({
         starships: json.data.results,
         previous: json.data.previous,
-        next: json.data.next
+        next: json.data.next,
+        count: json.data.count
       })
     );
   }
@@ -63,6 +46,7 @@ export const Consumer = Context.Consumer;
 
 // TODO
 
+// uraditi da ono sto se kuca u search polje ostane tu i dalje kad se menja route (smestiti ga u state?)
 // mozda uraditi listanje za pilote i filmove za svaki starship?
 // oznaciti redni broj strane na vrhu main-a
 

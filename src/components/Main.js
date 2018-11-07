@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import { Consumer } from "../Context.js";
-// import Starship from "./Starship.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class Main extends Component {
+export default class Search extends Component {
+  onChangeSearch = (url, dispatch, e) => {
+    // console.log(e.target.value);
+    url += e.target.value;
+    let obj = {};
+    axios.get(url).then(json => {
+      obj = json.data;
+      obj.type = "WHERE";
+      dispatch(obj);
+    });
+  };
+
   onClickPage = (url, dispatch, e) => {
     // console.log("url", url);
     // console.log("dispatch", dispatch);
-    console.log(e.target.value);
+    // console.log(e.target.name);
 
     let obj = {};
     if (url !== null) {
@@ -26,9 +36,15 @@ class Main extends Component {
     return (
       <Consumer>
         {value => {
-          // console.log("value", value);
-          const { starships, previous, next, dispatch } = value;
-          const starshipsJsx = starships.map(starship => (
+          // const {
+          //   search,
+          //   dispatch,
+          //   countSearch,
+          //   previousSearch,
+          //   nextSearch
+          // } = value;
+          const { starships, previous, next, dispatch, count } = value;
+          const searchJsx = starships.map(starship => (
             <Link
               key={starship.created}
               to={{
@@ -37,21 +53,32 @@ class Main extends Component {
               }}
               style={{ color: "yellow" }}
             >
-              {starship.name}
+              {starship.model}
               <br />
-              {/* <Starship key={starship.created} starship={starship} /> */}
             </Link>
           ));
+          console.log("value", value);
+          const url = "https://swapi.co/api/starships/?search=";
           return (
-            <div
-            // style={{ backgroundColor: "black", color: "black" }}
-            >
+            <div>
+              <input
+                onChange={this.onChangeSearch.bind(this, url, dispatch)}
+                type="text"
+              />
               <br />
-              {starshipsJsx}
-              <button onClick={this.onClickPage.bind(this, previous, dispatch)}>
+              Count: {count}
+              <br />
+              {searchJsx}
+              <button
+                onClick={this.onClickPage.bind(this, previous, dispatch)}
+                name="previous"
+              >
                 Previous
               </button>
-              <button onClick={this.onClickPage.bind(this, next, dispatch)}>
+              <button
+                onClick={this.onClickPage.bind(this, next, dispatch)}
+                name="next"
+              >
                 Next
               </button>
             </div>
@@ -61,5 +88,3 @@ class Main extends Component {
     );
   }
 }
-
-export default Main;
