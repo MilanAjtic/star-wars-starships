@@ -23,12 +23,12 @@ export class Provider extends Component {
     results: [],
     dispatch: action => {
       this.setState(state => reducer(state, action));
-      localStorage.setItem("state", JSON.stringify(action));
+      sessionStorage.setItem("state", JSON.stringify(action));
     },
     dispatchOld: action => this.setState(state => reducer(state, action))
   };
   componentDidMount() {
-    if (!localStorage.getItem("state")) {
+    if (!sessionStorage.getItem("state")) {
       axios.get("https://swapi.co/api/starships/").then(json => {
         this.setState({
           results: json.data.results,
@@ -36,11 +36,11 @@ export class Provider extends Component {
           next: json.data.next,
           count: json.data.count
         });
-        localStorage.setItem("state", JSON.stringify(json.data));
-        // localStorage.setItem("stateExists", "true");
+        sessionStorage.setItem("state", JSON.stringify(json.data));
+        // sessionStorage.setItem("stateExists", "true");
       });
     } else {
-      const data = JSON.parse(localStorage.getItem("state"));
+      const data = JSON.parse(sessionStorage.getItem("state"));
       this.setState(data);
     }
   }

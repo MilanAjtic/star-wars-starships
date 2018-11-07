@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Starship extends Component {
   render() {
     // console.log(this.props.match.params.name);
-    const data = JSON.parse(localStorage.getItem("state"));
+    const data = JSON.parse(sessionStorage.getItem("state"));
     const singleStarship = data.results.filter(starship => {
       return starship.name === this.props.match.params.name;
     });
