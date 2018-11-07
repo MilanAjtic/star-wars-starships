@@ -21,17 +21,22 @@ const reducer = (state, action) => {
 export class Provider extends Component {
   state = {
     starships: [],
-    dispatch: action => this.setState(state => reducer(state, action))
+    dispatch: action => {
+      this.setState(state => reducer(state, action));
+      localStorage.setItem("state", JSON.stringify(action));
+    },
+    dispatchOld: action => this.setState(state => reducer(state, action))
   };
   componentDidMount() {
-    axios.get("https://swapi.co/api/starships/").then(json =>
+    axios.get("https://swapi.co/api/starships/").then(json => {
       this.setState({
         starships: json.data.results,
         previous: json.data.previous,
         next: json.data.next,
         count: json.data.count
-      })
-    );
+      });
+      localStorage.setItem("state", JSON.stringify(json.data));
+    });
   }
   render() {
     return (
@@ -46,11 +51,12 @@ export const Consumer = Context.Consumer;
 
 // TODO
 
-// uraditi da ono sto se kuca u search polje ostane tu i dalje kad se menja route (smestiti ga u state?)
+// da se aplikacija ne raspadne kad se na strani Starship uradi refresh
+// da ono sto se kuca u search polje ostane tu i dalje kad se menja route (smestiti ga u state?)
 // mozda uraditi listanje za pilote i filmove za svaki starship?
-// oznaciti redni broj strane na vrhu main-a
 
 // DONE
 
 // ubaci rutu za stranu pojedinacnog starshipa
-// uradi search (mozda na posebnoj ruti, ako ce search ici na api, a ne traziti kroz state)
+// uradi search
+// da se podaci za Starship dobijaju iz state-a, a ne preko linka

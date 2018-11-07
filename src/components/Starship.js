@@ -7,6 +7,30 @@ export default class Starship extends Component {
     return (
       <Consumer>
         {value => {
+          // const {
+          //   name,
+          //   model,
+          //   manufacturer,
+          //   cost_in_credits,
+          //   length,
+          //   max_atmosphering_speed,
+          //   crew,
+          //   passengers,
+          //   cargo_capacity,
+          //   consumables,
+          //   hyperdrive_rating,
+          //   MGLT,
+          //   starship_class,
+          //   pilots,
+          //   films
+          // } = this.props.location.starship;
+
+          console.log("value", value);
+
+          const singleStarship = value.starships.filter(starship => {
+            return starship.name === this.props.match.params.name;
+          });
+          console.log("singleStarship", singleStarship);
           const {
             name,
             model,
@@ -23,8 +47,7 @@ export default class Starship extends Component {
             starship_class,
             pilots,
             films
-          } = this.props.location.starship;
-          console.log(value);
+          } = singleStarship[0];
           return (
             <div>
               <b>{name}</b>

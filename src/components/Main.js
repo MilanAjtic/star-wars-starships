@@ -57,7 +57,7 @@ export default class Search extends Component {
               <br />
             </Link>
           ));
-          console.log("value", value);
+          // console.log("value", value);
           const url = "https://swapi.co/api/starships/?search=";
           return (
             <div>
