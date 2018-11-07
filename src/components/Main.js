@@ -43,8 +43,8 @@ export default class Search extends Component {
           //   previousSearch,
           //   nextSearch
           // } = value;
-          const { starships, previous, next, dispatch, count } = value;
-          const searchJsx = starships.map(starship => (
+          const { results, previous, next, dispatch, count } = value;
+          const searchJsx = results.map(starship => (
             <Link
               key={starship.created}
               to={{
