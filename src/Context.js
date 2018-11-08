@@ -64,5 +64,5 @@ export const Consumer = Context.Consumer;
 
 // ubaci rutu za stranu pojedinacnog starshipa
 // uradi search
-// da se podaci za Starship dobijaju iz state-a, a ne preko linka (STARO - sada cim stigne response, smestaju se u local storage, a unutar Starship se citaju iskljucivo preko local storage, a ne iz state preko Consumer, i ne dobijaju se preko Link, kao u starim verzijama)
-// da se aplikacija ne raspadne kad se na strani Starship uradi refresh (uradjeno preko local storage)
+// da se podaci za Starship dobijaju iz state-a, a ne preko linka (STARO - sada cim stigne response, smestaju se u session storage, a unutar Starship se citaju iskljucivo preko session storage, a ne iz state preko Consumer, i ne dobijaju se preko Link, kao u starim verzijama)
+// da se aplikacija ne raspadne kad se na strani Starship uradi refresh (uradjeno preko session storage)
