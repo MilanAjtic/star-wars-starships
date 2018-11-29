@@ -48,8 +48,8 @@ export default class Search extends Component {
             <Link
               key={starship.created}
               to={{
-                pathname: `/starship/${starship.name}`,
-                starship: starship
+                pathname: `/starship/${starship.name}`
+                // starship: starship
               }}
               style={{ color: "yellow" }}
             >
